@@ -9,21 +9,15 @@ import {
   Alert,
 } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
-import Icon from 'react-native-vector-icons/EvilIcons';
 import { useFavorites } from './FavoritesContext';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addFavoriteMethod,
-  favoriteMethod,
-  removeFavoriteMethod,
-} from '../../../app/Favorite';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../Firebase-config';
 import { messagesMethod } from '../../../app/Message';
 import { usersMethod } from '../../../app/users';
+import Card from '../../components/Card';
 
 const { width } = Dimensions.get('window');
 const data = [
@@ -52,178 +46,6 @@ const data = [
     lastSeenIcon: 'clock',
   },
 ];
-
-const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const handleCardPress = async () => {
-    navigation.navigate('UserProfile', { userId: card.id });
-  };
-  const userinfo = useSelector((state) => state);
-  const favStatus = favArr.filter((item) => {
-    return card.id == item.id;
-  });
-
-  console.log(card.image);
-
-  return (
-    <TouchableOpacity onPress={handleCardPress}>
-      <View style={styles.card}>
-        <View style={{ flexDirection: 'row-reverse', alignItems: 'center' }}>
-          {/* <Image
-            source={require('./assets/girltt.jpg')}
-            style={styles.profileImage}
-            resizeMode="cover"
-          /> */}
-          <Image
-            source={{ uri: card.image }}
-            style={styles.profileImage}
-            resizeMode='cover'
-          />
-
-          <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 10 }}>
-            <Text style={styles.name}>{card.name}</Text>
-            <View
-              style={{
-                flexDirection: 'row-reverse',
-                alignItems: 'center',
-                marginTop: 5,
-              }}
-            >
-              <Icon name='location' size={20} />
-              <Text style={styles.detailText}>
-                {card.country},{card.city}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row-reverse',
-                alignItems: 'center',
-                marginTop: 5,
-              }}
-            >
-              <Icon name={card.lastSeenIcon} size={20} />
-              <Text style={styles.detailText}>
-                اخر تواجد قبل{' '}
-                {card.active_status && card.active_status.substring(12)} دقائق
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.separator} />
-        <Text style={styles.description}>{card.pio}</Text>
-        <View style={styles.infoBoxContainer}>{/* Info buttons... */}</View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.gradientButton, styles.messageButton]}
-            onPress={() => {
-              navigation.navigate('chat', {
-                participant: card.id,
-                name: card.name,
-                image: card.image,
-              });
-            }}
-          >
-            <Icon name='envelope' size={30} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.gradientButton, styles.favoriteButton]}
-            onPress={async () => {
-              try {
-                const response = await axios.post(
-                  `https://marriage-application.onrender.com/addtofav?id=${userinfo.user.userArray.id}&favId=${card.id}`
-                );
-                // Alert.alert(response.data)
-                if (response.status) {
-                  toggleFavorite(card.id);
-                  Alert.alert(response.data);
-                  if (response.data === 'User added to fav') {
-                    dispatch(addFavoriteMethod(card));
-                  } else {
-                    dispatch(removeFavoriteMethod(card.id));
-                  }
-                }
-              } catch (err) {
-                Alert.alert(err);
-              }
-            }}
-          >
-            <Icon
-              name='star'
-              size={30}
-              style={[
-                styles.icon,
-                {
-                  color:
-                    isFavorite || favStatus.length == 1 ? '#ECB7B7' : 'white',
-                },
-              ]} // Directly apply color change here
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBoxContainer}>
-          {card.marital_status_woman_man && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>
-                {card.marital_status_woman_man}
-              </Text>
-            </TouchableOpacity>
-          )}
-          {card.religious_denomination && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>
-                {card.religious_denomination}
-              </Text>
-            </TouchableOpacity>
-          )}
-          {card.skin_woman_man && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>{card.skin_woman_man}</Text>
-            </TouchableOpacity>
-          )}
-          {card.height_woman && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>{card.height_woman}cm</Text>
-            </TouchableOpacity>
-          )}
-          {card.weight_woman && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>{card.weight_woman}kg</Text>
-            </TouchableOpacity>
-          )}
-          {card.smoking_drinking_woman_man && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>
-                🚬 {card.smoking_drinking_woman_man}
-              </Text>
-            </TouchableOpacity>
-          )}
-          {card.work_status_woman_man && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>
-                {card.work_status_woman_man}
-              </Text>
-            </TouchableOpacity>
-          )}
-          {card.need_kids_woman_man && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>
-                {card.need_kids_woman_man}👧
-              </Text>
-            </TouchableOpacity>
-          )}
-          {card.educational_level_woman_man && (
-            <TouchableOpacity style={styles.infoButton}>
-              <Text style={styles.infoButtonText}>
-                {card.educational_level_woman_man}
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
 
 const NoMoreCards = () => (
   <View style={styles.noMoreCards}>
@@ -284,7 +106,7 @@ const HomeScreen = () => {
           />
         )}
         renderNoMoreCards={() => <NoMoreCards />}
-        useNativeDriver={true}
+        useNativeDriver = {true}
       />
     </View>
   );
