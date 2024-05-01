@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "react-native-image-picker";
-import arrowleft from "./assets/arrow-left.svg"
+import arrowleft from "../../assets/arrow-left.svg"
 import { AntDesign } from "@expo/vector-icons";
 
 import axios from "axios";
@@ -68,10 +68,10 @@ const UserProfile = ({ route }) => {
       });
   };
   const [images, setImages] = useState([
-    require("./assets/1.png"),
-    require("./assets/2.png"),
-    require("./assets/3.png"),
-    require("./assets/4.png"),
+    require("../../assets/1.png"),
+    require("../../assets/2.png"),
+    require("../../assets/3.png"),
+    require("../../assets/4.png"),
   ]);
   // const images = user.photoGallery || []; // Use user's photoGallery or an empty array if undefined
   return (
@@ -91,7 +91,7 @@ const UserProfile = ({ route }) => {
             <View style={styles.profileRow}>
               <TouchableOpacity onPress={handleChooseImage}>
                 <Image
-                  source={{ uri: profile.image } || require("./assets/pp.png")}
+                  source={{ uri: profile.image } || require("../../assets/pp.png")}
                   style={styles.profileImageLarge}
                 />
               </TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,18 +7,18 @@ import {
   TextInput,
   ScrollView,
   Image,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import ProgressBar from "react-native-progress/Bar";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import RNPickerSelect from "react-native-picker-select";
-import countries from "./countries.json";
-import customCountries from "./customCountry.json";
-import customCities from "./customCities.json";
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import ProgressBar from 'react-native-progress/Bar';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import RNPickerSelect from 'react-native-picker-select';
+import countries from '../../countries.json';
+import customCountries from '../../customCountry.json';
+import customCities from '../../customCities.json';
 
 const GeneralQ = ({ navigation, route }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
   const [selectedGender, setSelectedGender] = useState(null);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [userBirthday, setUserBirthday] = useState(null);
@@ -29,7 +29,7 @@ const GeneralQ = ({ navigation, route }) => {
   const [city_country, setCity_country] = useState([]);
   const [selectedMathab, setSelectedMathab] = useState(null);
   const [selectedFamily, setSelectedFamily] = useState(null);
-  const phoneNumber = route.params?.phoneNumber
+  const phoneNumber = route.params?.phoneNumber;
   const [minDate, setMinDate] = useState(() => {
     const currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - 19);
@@ -87,11 +87,13 @@ const GeneralQ = ({ navigation, route }) => {
       setSelectedCountry(selected); // Set the entire selected country object
     }
   };
-  const handleSelectCountryName = (value,id) => {
-    const selected = customCountries.find((country) => country.name_ar === value);
+  const handleSelectCountryName = (value, id) => {
+    const selected = customCountries.find(
+      (country) => country.name_ar === value
+    );
     if (selected) {
-      setSelectedCountryName(selected)
-      const cityArray=customCities.filter((item)=>item.country_id==id)
+      setSelectedCountryName(selected);
+      const cityArray = customCities.filter((item) => item.country_id == id);
       setCity_country(cityArray);
     }
   };
@@ -106,46 +108,44 @@ const GeneralQ = ({ navigation, route }) => {
     if (currentStep < 8) {
       setCurrentStep(currentStep + 1);
     } else {
-      if (selectedGender === "Male") {
-        navigation.navigate("BoysQ",{
-          phoneNumber:phoneNumber,
-          userName:userName,
-          selectedGender:selectedGender,
-          userBirthday:JSON.stringify(userBirthday),
-          selectedCountry:selectedCountry,
-          selectedCountryName:selectedCountryName,
-          selectedCity:selectedCity,
-          selectedMathab:selectedMathab,
-          selectedFamily:selectedFamily
-
+      if (selectedGender === 'Male') {
+        navigation.navigate('BoysQ', {
+          phoneNumber: phoneNumber,
+          userName: userName,
+          selectedGender: selectedGender,
+          userBirthday: JSON.stringify(userBirthday),
+          selectedCountry: selectedCountry,
+          selectedCountryName: selectedCountryName,
+          selectedCity: selectedCity,
+          selectedMathab: selectedMathab,
+          selectedFamily: selectedFamily,
         });
-      } else if (selectedGender === "Female") {
-        navigation.navigate("GirlsQ",{
-          phoneNumber:phoneNumber,
-          userName:userName,
-          selectedGender:selectedGender,
-          userBirthday:userBirthday,
-          selectedCountry:selectedCountry,
-          selectedCountryName:selectedCountryName,
-          selectedCity:selectedCity,
-          selectedMathab:selectedMathab,
-          selectedFamily:selectedFamily
-
+      } else if (selectedGender === 'Female') {
+        navigation.navigate('GirlsQ', {
+          phoneNumber: phoneNumber,
+          userName: userName,
+          selectedGender: selectedGender,
+          userBirthday: userBirthday,
+          selectedCountry: selectedCountry,
+          selectedCountryName: selectedCountryName,
+          selectedCity: selectedCity,
+          selectedMathab: selectedMathab,
+          selectedFamily: selectedFamily,
         });
       }
     }
   };
 
   const getFamilyStyle = (familyLevel) => {
-    const defaultBorderColor = "#F2F2F2";
-    const selectedBorderColor = "#ECB7B7";
+    const defaultBorderColor = '#F2F2F2';
+    const selectedBorderColor = '#ECB7B7';
 
     return {
-      width: "100%",
+      width: '100%',
       height: 50,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "white",
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'white',
       borderRadius: 17,
       borderWidth: 2,
       borderColor:
@@ -153,57 +153,57 @@ const GeneralQ = ({ navigation, route }) => {
           ? selectedBorderColor
           : defaultBorderColor,
       marginVertical: 5,
-      fontFamily: "Cairo",
+      fontFamily: 'Cairo',
     };
   };
 
   const getMathabStyle = (Mathab) => {
-    const defaultBorderColor = "#F2F2F2";
-    const selectedBorderColor = "#ECB7B7";
+    const defaultBorderColor = '#F2F2F2';
+    const selectedBorderColor = '#ECB7B7';
 
     return {
-      width: "100%",
+      width: '100%',
       height: 50,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "white",
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'white',
       borderRadius: 17,
       borderWidth: 2,
       borderColor:
         selectedMathab === Mathab ? selectedBorderColor : defaultBorderColor,
       marginVertical: 5,
-      fontFamily: "Cairo",
+      fontFamily: 'Cairo',
     };
   };
 
   const MathabScreen = () => {
     return (
-      <View style={{ flex: 1, backgroundColor: "white", padding: 30 }}>
+      <View style={{ flex: 1, backgroundColor: 'white', padding: 30 }}>
         <View style={styles.educationLevelButtons}>
           <TouchableOpacity
-            onPress={() => handleMathabSelection("سنـــي")}
-            style={getMathabStyle("سنـــي")}
+            onPress={() => handleMathabSelection('سنـــي')}
+            style={getMathabStyle('سنـــي')}
           >
             <Text style={styles.mathabText}>سنـــي</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleMathabSelection("شيــــعــي")}
-            style={getMathabStyle("شيــــعــي")}
+            onPress={() => handleMathabSelection('شيــــعــي')}
+            style={getMathabStyle('شيــــعــي')}
           >
             <Text style={styles.mathabText}>شيــــعــي</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleMathabSelection("اسمــاعيلي")}
-            style={getMathabStyle("اسمــاعيلي")}
+            onPress={() => handleMathabSelection('اسمــاعيلي')}
+            style={getMathabStyle('اسمــاعيلي')}
           >
             <Text style={styles.mathabText}>اسمــاعيلي</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleMathabSelection("جعــفـري")}
-            style={getMathabStyle("جعــفـري")}
+            onPress={() => handleMathabSelection('جعــفـري')}
+            style={getMathabStyle('جعــفـري')}
           >
             <Text style={styles.mathabText}>جعــفـري</Text>
           </TouchableOpacity>
@@ -214,25 +214,25 @@ const GeneralQ = ({ navigation, route }) => {
 
   const FamilyScreen = () => {
     return (
-      <View style={{ flex: 1, backgroundColor: "white", padding: 30 }}>
+      <View style={{ flex: 1, backgroundColor: 'white', padding: 30 }}>
         <View style={styles.educationLevelButtons}>
           <TouchableOpacity
-            onPress={() => handleFamily("أنتمي لعائلة قبيلية")}
-            style={getFamilyStyle("أنتمي لعائلة قبيلية")}
+            onPress={() => handleFamily('أنتمي لعائلة قبيلية')}
+            style={getFamilyStyle('أنتمي لعائلة قبيلية')}
           >
             <Text style={styles.mathabText}>أنتمي لعائلة قبيلية</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleFamily("أنتمي لعائلة غير قبيلية")}
-            style={getFamilyStyle("أنتمي لعائلة غير قبيلية")}
+            onPress={() => handleFamily('أنتمي لعائلة غير قبيلية')}
+            style={getFamilyStyle('أنتمي لعائلة غير قبيلية')}
           >
             <Text style={styles.mathabText}>أنتمي لعائلة غير قبيلية</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleFamily("أفضل أن لا أجيب")}
-            style={getFamilyStyle("أفضل أن لا أجيب")}
+            onPress={() => handleFamily('أفضل أن لا أجيب')}
+            style={getFamilyStyle('أفضل أن لا أجيب')}
           >
             <Text style={styles.mathabText}>أفضل أن لا أجيب</Text>
           </TouchableOpacity>
@@ -243,67 +243,69 @@ const GeneralQ = ({ navigation, route }) => {
 
   const steps = [
     {
-      question: " * اسمــي",
-      inputPlaceholder: "اضغط لكتابة الاسم",
+      question: ' * اسمــي',
+      inputPlaceholder: 'اضغط لكتابة الاسم',
       value: userName,
       handleChange: handleNameChange,
     },
     {
-      question: " * أنـــا",
+      question: ' * أنـــا',
       choices: [
         {
-          label: "انثى",
-          value: "Female",
-          image: require("./assets/female.png"),
-          borderColor: "rgb(245,180,181)",
+          label: 'انثى',
+          value: 'Female',
+          image: require('../../assets/female.png'),
+          borderColor: 'rgb(245,180,181)',
         },
         {
-          label: "ذكر",
-          value: "Male",
-          image: require("./assets/male.png"),
-          borderColor: "rgb(72,88,104)",
+          label: 'ذكر',
+          value: 'Male',
+          image: require('../../assets/male.png'),
+          borderColor: 'rgb(72,88,104)',
         },
       ],
       selectedChoice: selectedGender,
       handleChoiceSelect: handleGenderSelection,
     },
     {
-      question: " * تاريخ ميلادي",
-      inputPlaceholder: "---",
+      question: ' * تاريخ ميلادي',
+      inputPlaceholder: '---',
       value: userBirthday
-        ? userBirthday.toLocaleDateString("ar-EG", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-        : "",
+        ? userBirthday.toLocaleDateString('ar-EG', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        : '',
       handleChange: showDatePicker,
     },
     {
-      question: "* جنسيـتـي",
-      inputPlaceholder: "اختر الدولة...",
+      question: '* جنسيـتـي',
+      inputPlaceholder: 'اختر الدولة...',
       value: selectedCountry,
       handleChange: handleSelectCountry,
-    }, {
-      question: "* البلد",
-      inputPlaceholder: "اختر البلد...",
+    },
+    {
+      question: '* البلد',
+      inputPlaceholder: 'اختر البلد...',
       value: selectedCountryName,
       handleChange: handleSelectCountryName,
-    }, {
-      question: "* المدينة",
-      inputPlaceholder: "اختر المدينة...",
+    },
+    {
+      question: '* المدينة',
+      inputPlaceholder: 'اختر المدينة...',
       value: selectedCity,
       handleChange: handleSelectCity,
     },
     {
-      question: "مذهبـــي *",
-      inputPlaceholder: "اختر الإجابة...",
+      question: 'مذهبـــي *',
+      inputPlaceholder: 'اختر الإجابة...',
       value: selectedMathab,
       handleChange: handleMathabSelection,
     },
     {
-      question: "من الناحية القبلية", // Sixth question
-      inputPlaceholder: "اختر الإجابة...",
+      question: 'من الناحية القبلية', // Sixth question
+      inputPlaceholder: 'اختر الإجابة...',
       value: selectedFamily,
       handleChange: handleFamily,
     },
@@ -320,8 +322,8 @@ const GeneralQ = ({ navigation, route }) => {
             progress={currentStep / totalSteps}
             width={null}
             height={10}
-            color="#ECB7B7"
-            unfilledColor="rgba(236, 183, 183, 0.43)"
+            color='#ECB7B7'
+            unfilledColor='rgba(236, 183, 183, 0.43)'
             borderRadius={9}
           />
         </View>
@@ -333,20 +335,20 @@ const GeneralQ = ({ navigation, route }) => {
             style={styles.circularButton}
             onPress={handlePreviousClick}
           >
-            <Ionicons name="arrow-back" size={24} color="#9B9B9B" />
+            <Ionicons name='arrow-back' size={24} color='#9B9B9B' />
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.circularButton}
             onPress={handleNextClick}
           >
-            <Ionicons name="arrow-forward" size={24} color="#ECB7B7" />
+            <Ionicons name='arrow-forward' size={24} color='#ECB7B7' />
           </TouchableOpacity>
         </View>
 
         <ScrollView
           contentContainerStyle={styles.contentContainer}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps='handled'
         >
           {currentStepData && (
             <Text style={styles.questionText}>{currentStepData.question}</Text>
@@ -372,7 +374,7 @@ const GeneralQ = ({ navigation, route }) => {
                   style={[
                     styles.choice,
                     currentStepData.selectedChoice === choice.value && {
-                      borderColor: "#ECB7B7",
+                      borderColor: '#ECB7B7',
                     },
                     index > 0 && { marginLeft: 30 },
                   ]}
@@ -393,7 +395,7 @@ const GeneralQ = ({ navigation, route }) => {
                 editable={false}
                 style={{
                   ...styles.inputField,
-                  textAlign: "center", // Add this line
+                  textAlign: 'center', // Add this line
                 }}
               />
               <TouchableOpacity onPress={showDatePicker}>
@@ -414,18 +416,18 @@ const GeneralQ = ({ navigation, route }) => {
                 }))}
                 value={selectedCountry ? selectedCountry.name : null}
                 placeholder={{
-                  label: "اختر الدولة...",
+                  label: 'اختر الدولة...',
                   value: null,
                 }}
-                placeholderTextColor="#9B9B9B" // Set the color for the placeholder text
+                placeholderTextColor='#9B9B9B' // Set the color for the placeholder text
                 style={{
                   inputIOS: {
-                    textAlign: "center",
-                    color: "black", // Set the color for the selected item text
+                    textAlign: 'center',
+                    color: 'black', // Set the color for the selected item text
                   },
                   inputAndroid: {
-                    textAlign: "center",
-                    color: "black", // Set the color for the selected item text
+                    textAlign: 'center',
+                    color: 'black', // Set the color for the selected item text
                   },
                 }}
               />
@@ -434,25 +436,27 @@ const GeneralQ = ({ navigation, route }) => {
           {currentStep === 5 && currentStepData && (
             <View>
               <RNPickerSelect
-                onValueChange={(value,id) => { handleSelectCountryName(value,id) }}
+                onValueChange={(value, id) => {
+                  handleSelectCountryName(value, id);
+                }}
                 items={customCountries.map((country) => ({
                   label: country.name_ar,
                   value: country.name_ar,
                 }))}
                 value={selectedCountryName ? selectedCountryName.name_ar : null}
                 placeholder={{
-                  label: "اختر البلد...",
+                  label: 'اختر البلد...',
                   value: null,
                 }}
-                placeholderTextColor="#9B9B9B" // Set the color for the placeholder text
+                placeholderTextColor='#9B9B9B' // Set the color for the placeholder text
                 style={{
                   inputIOS: {
-                    textAlign: "center",
-                    color: "black", // Set the color for the selected item text
+                    textAlign: 'center',
+                    color: 'black', // Set the color for the selected item text
                   },
                   inputAndroid: {
-                    textAlign: "center",
-                    color: "black", // Set the color for the selected item text
+                    textAlign: 'center',
+                    color: 'black', // Set the color for the selected item text
                   },
                 }}
               />
@@ -469,18 +473,18 @@ const GeneralQ = ({ navigation, route }) => {
                 }))}
                 value={selectedCity ? selectedCity.name_ar : null}
                 placeholder={{
-                  label: "اختر المدينة...",
+                  label: 'اختر المدينة...',
                   value: null,
                 }}
-                placeholderTextColor="#9B9B9B" // Set the color for the placeholder text
+                placeholderTextColor='#9B9B9B' // Set the color for the placeholder text
                 style={{
                   inputIOS: {
-                    textAlign: "center",
-                    color: "black", // Set the color for the selected item text
+                    textAlign: 'center',
+                    color: 'black', // Set the color for the selected item text
                   },
                   inputAndroid: {
-                    textAlign: "center",
-                    color: "black", // Set the color for the selected item text
+                    textAlign: 'center',
+                    color: 'black', // Set the color for the selected item text
                   },
                 }}
               />
@@ -493,11 +497,11 @@ const GeneralQ = ({ navigation, route }) => {
 
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
-            mode="date"
+            mode='date'
             onConfirm={handleConfirmDate}
             onCancel={hideDatePicker}
-            locale="ar"
-            minimumDate={new Date("1900-01-01")} // Set a reasonable past date
+            locale='ar'
+            minimumDate={new Date('1900-01-01')} // Set a reasonable past date
             maximumDate={new Date()} // Set the maximum date to the current date
             style={{ zIndex: 1000 }} // Set a higher zIndex
           />
@@ -510,48 +514,48 @@ const GeneralQ = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   stepText: {
-    textAlign: "left",
-    color: "#ECB7B7",
+    textAlign: 'left',
+    color: '#ECB7B7',
     fontSize: 10,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 8, // Adjust the spacing as needed
   },
 
   contentContainer: {
     flexGrow: 1,
     padding: 30,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   circularButtonsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 10,
   },
   circularButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginVertical: 5,
     borderWidth: 2,
-    borderColor: "#F2F2F2",
+    borderColor: '#F2F2F2',
   },
   choicesContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   choice: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 10,
     marginVertical: 10,
     marginHorizontal: 5,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 10,
   },
   genderImage: {
@@ -564,43 +568,43 @@ const styles = StyleSheet.create({
     paddingTop: 30, // Increase the top padding to push content below the status bar
   },
   inputField: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
     borderRadius: 17,
     borderWidth: 2,
-    borderColor: "#F2F2F2",
+    borderColor: '#F2F2F2',
     marginVertical: 100,
-    textAlign: "right",
+    textAlign: 'right',
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   questionText: {
-    textAlign: "right",
-    color: "black",
+    textAlign: 'right',
+    color: 'black',
     fontSize: 40,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     padding: 10,
   },
   datePickerText: {
-    textAlign: "center",
-    color: "#ECB7B7",
+    textAlign: 'center',
+    color: '#ECB7B7',
     marginTop: -90,
   },
   mathabText: {
-    color: "black",
+    color: 'black',
     fontSize: 20,
-    fontFamily: "Cairo",
-    fontWeight: "50",
+    fontFamily: 'Cairo',
+    fontWeight: '50',
     lineHeight: 33,
-    wordWrap: "break-word",
+    wordWrap: 'break-word',
   },
   educationLevelButtons: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "stretch",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
     marginTop: 20,
     padding: 20,
   },

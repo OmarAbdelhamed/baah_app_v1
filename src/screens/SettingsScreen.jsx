@@ -3,9 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleMode } from './Redux/DarkMode';
+import { handleMode } from '../../app/DarkMode';
 import axios from 'axios';
-import { userMethod } from './Redux/user';
+import { userMethod } from '../../app/user';
 
 const SettingsScreen = ({ navigation }) => {
   const [pushNotificationsEnabled, setPushNotificationsEnabled] =

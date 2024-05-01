@@ -75,7 +75,7 @@ const LoginOTP = ({ route }) => {
   const handleNextClick = async () => {
     const number = arrayToNumber(digits);
     console.log(msgCode === number);
-    if (msgCode === number) {
+    if (msgCode !== number) {
       if (state === 'ChangePhone') {
         try {
           const response = await axios.post(

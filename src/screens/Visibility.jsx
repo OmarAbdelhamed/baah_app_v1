@@ -49,7 +49,7 @@ const Visibility = ({ route }) => {
 
   const handleContinue = () => {
     // Navigate to 'Pioscreen' when the button is pressed
-    navigation.navigate('PioScreen', {
+    navigation.navigate('BioScreen', {
       phoneNumber: phoneNumber,
       userName: userName,
       selectedGender: selectedGender,

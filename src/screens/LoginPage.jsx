@@ -14,7 +14,7 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch } from "react-redux";
-import { userMethod } from "./Redux/user";
+import { userMethod } from "../../app/user";
 
 
 const ProfileScreen = ({route}) => {

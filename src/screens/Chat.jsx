@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { useDispatch, useSelector } from "react-redux";
 //  import firestore from '@react-native-firebase/firestore';
-import { db } from "./Firebase-config";
+import { db } from "../../Firebase-config";
 import {
     collection,
     addDoc,

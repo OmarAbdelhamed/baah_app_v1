@@ -55,7 +55,6 @@
 //   );
 // };
 
-
 // const MainHome = () => {
 //   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -257,26 +256,31 @@
 
 // export default MainHome;
 
-
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Alert } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Alert,
+} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   MaterialCommunityIcons,
   AntDesign,
   FontAwesome,
-} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import HomeScreen from "./HomeScreen";
-import FavoriteScreen from "./FavoriteScreen";
-import MessageScreen from "./MessageScreen";
-import { FavoritesProvider } from "./FavoritesContext";
-import Profile from "./Profile";
-import SearchSubMenu from "./SearchSubMenu";
-import ProfileContainer from "./ProfileContainer";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { userMethod } from "./Redux/user";
-import { useDispatch } from "react-redux";
+} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import HomeScreen from './tabScreens/HomeScreen';
+import FavoriteScreen from './tabScreens/FavoriteScreen';
+import MessageScreen from './tabScreens/MessageScreen';
+import { FavoritesProvider } from './tabScreens/FavoritesContext';
+import Profile from './tabScreens/Profile';
+import SearchSubMenu from './tabScreens/SearchSubMenu';
+import ProfileContainer from './tabScreens/ProfileContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userMethod } from '../../app/user';
+import { useDispatch } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
@@ -284,7 +288,7 @@ const CustomTabBarButton = ({ children, onPress }) => {
   const [isPressed, setIsPressed] = useState(false);
   const navigation = useNavigation();
   const handleSearchPress = () => {
-    navigation.navigate("Home");
+    navigation.navigate('Home');
     setIsPressed(!isPressed); // Toggle isPressed state
   };
 
@@ -303,17 +307,17 @@ const CustomTabBarButton = ({ children, onPress }) => {
         <View
           style={[
             styles.searchButton,
-            isPressed ? { backgroundColor: "#ECB7B7" } : null,
+            isPressed ? { backgroundColor: '#ECB7B7' } : null,
           ]}
         >
-          <AntDesign name="search1" size={30} color="#fff" />
+          <AntDesign name='search1' size={30} color='#fff' />
         </View>
       </TouchableWithoutFeedback>
     </View>
   );
 };
 
-const Sidebar = ({ onClose = () => { } }) => {
+const Sidebar = ({ onClose = () => {} }) => {
   const navigation = useNavigation();
 
   const handleNavigation = (screenName) => {
@@ -322,13 +326,13 @@ const Sidebar = ({ onClose = () => { } }) => {
   };
 
   const sidebarItems = [
-    { screenName: "Settings", icon: "cog" },
-    { screenName: "Subscription", icon: "credit-card" },
-    { screenName: "Profile", icon: "user" },
-    { screenName: "AboutApp", icon: "info-circle" },
-    { screenName: "Logout", icon: "sign-out" },
+    { screenName: 'Settings', icon: 'cog' },
+    { screenName: 'Subscription', icon: 'credit-card' },
+    { screenName: 'Profile', icon: 'user' },
+    { screenName: 'AboutApp', icon: 'info-circle' },
+    { screenName: 'Logout', icon: 'sign-out' },
   ];
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <TouchableWithoutFeedback onPress={onClose}>
@@ -337,21 +341,18 @@ const Sidebar = ({ onClose = () => { } }) => {
           <TouchableWithoutFeedback
             key={index}
             onPress={async () => {
-              if (item.screenName === "Logout") {
-                dispatch(userMethod({}))
-                navigation.navigate("Login",{
-                  "state":"register"
-            
+              if (item.screenName === 'Logout') {
+                dispatch(userMethod({}));
+                navigation.navigate('Login', {
+                  state: 'register',
                 });
-
               } else {
-                handleNavigation(item.screenName)
+                handleNavigation(item.screenName);
               }
               // if(item.screenName==="Logout"){
               //   onPress={async()=>{
               //     await AsyncStorage.removeItem('login');
               //     navigation.navigate("Login");
-
 
               //   }}
               // }else{
@@ -361,7 +362,7 @@ const Sidebar = ({ onClose = () => { } }) => {
             }}
           >
             <View style={styles.sidebarItem}>
-              <FontAwesome name={item.icon} size={24} color="black" />
+              <FontAwesome name={item.icon} size={24} color='black' />
               <Text style={styles.sidebarItemText}>{item.screenName}</Text>
             </View>
           </TouchableWithoutFeedback>
@@ -395,20 +396,20 @@ const MainHome = () => {
             <ProfileContainer />
             <TouchableWithoutFeedback onPress={handleMenuPress}>
               <View style={styles.menuButton}>
-                <MaterialCommunityIcons name="menu" size={24} color="black" />
+                <MaterialCommunityIcons name='menu' size={24} color='black' />
               </View>
             </TouchableWithoutFeedback>
           </View>
 
           <View style={styles.contentContainer}>
             <Tab.Navigator
-              initialRouteName="Home"
+              initialRouteName='Home'
               screenOptions={{
                 tabBarShowLabel: false,
                 headerShown: false,
                 tabBarStyle: {
                   elevation: 0,
-                  backgroundColor: "#ffffff",
+                  backgroundColor: '#ffffff',
                   height: 90,
 
                   ...styles.shadow,
@@ -416,19 +417,19 @@ const MainHome = () => {
               }}
             >
               <Tab.Screen
-                name="home"
+                name='home'
                 component={HomeScreen}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
                       <MaterialCommunityIcons
-                        name={focused ? "home" : "home"}
+                        name={focused ? 'home' : 'home'}
                         size={25}
-                        color={focused ? "#ECB7B7" : "#4B5867"}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
                       />
                       <Text
                         style={{
-                          color: focused ? "#ECB7B7" : "#4B5867",
+                          color: focused ? '#ECB7B7' : '#4B5867',
                           fontSize: 12,
                         }}
                       >
@@ -440,19 +441,19 @@ const MainHome = () => {
               />
 
               <Tab.Screen
-                name="Message"
+                name='Message'
                 component={MessageScreen}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
                       <AntDesign
-                        name={focused ? "message1" : "message1"}
+                        name={focused ? 'message1' : 'message1'}
                         size={25}
-                        color={focused ? "#ECB7B7" : "#4B5867"}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
                       />
                       <Text
                         style={{
-                          color: focused ? "#ECB7B7" : "#4B5867",
+                          color: focused ? '#ECB7B7' : '#4B5867',
                           fontSize: 12,
                         }}
                       >
@@ -464,7 +465,7 @@ const MainHome = () => {
               />
 
               <Tab.Screen
-                name="Home"
+                name='Home'
                 component={HomeScreen}
                 options={{
                   tabBarButton: (props) => <CustomTabBarButton {...props} />,
@@ -472,19 +473,19 @@ const MainHome = () => {
               />
 
               <Tab.Screen
-                name="Favorite"
+                name='Favorite'
                 component={FavoriteScreen}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
                       <MaterialCommunityIcons
-                        name={focused ? "star" : "star-outline"}
+                        name={focused ? 'star' : 'star-outline'}
                         size={30}
-                        color={focused ? "#ECB7B7" : "#4B5867"}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
                       />
                       <Text
                         style={{
-                          color: focused ? "#ECB7B7" : "#4B5867",
+                          color: focused ? '#ECB7B7' : '#4B5867',
                           fontSize: 12,
                         }}
                       >
@@ -496,19 +497,19 @@ const MainHome = () => {
               />
 
               <Tab.Screen
-                name="Profile"
+                name='Profile'
                 component={Profile}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
                       <AntDesign
-                        name={focused ? "profile" : "profile"}
+                        name={focused ? 'profile' : 'profile'}
                         size={25}
-                        color={focused ? "#ECB7B7" : "#4B5867"}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
                       />
                       <Text
                         style={{
-                          color: focused ? "#ECB7B7" : "#4B5867",
+                          color: focused ? '#ECB7B7' : '#4B5867',
                           fontSize: 12,
                         }}
                       >
@@ -527,20 +528,19 @@ const MainHome = () => {
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     paddingTop: 40,
   },
   sidebarContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     width: 200,
-    height: "100%",
-    position: "absolute",
+    height: '100%',
+    position: 'absolute',
     left: 0,
     top: 0,
     zIndex: 1,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -553,7 +553,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: '#ccc',
   },
   sidebarItemText: {
     fontSize: 16,
@@ -563,21 +563,21 @@ const styles = StyleSheet.create({
   },
 
   profileMenuContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    position: "relative",
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
   },
   menuButton: {
     width: 40,
     height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
     left: 10,
   },
 
   shadow: {
-    shadowColor: "#7F5D50",
+    shadowColor: '#7F5D50',
     shadowOffset: {
       width: 0,
       height: 10,
@@ -587,15 +587,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   tabIconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     top: 10,
-    color: "#4B5867", // Default color
+    color: '#4B5867', // Default color
   },
   plusButtonContainer: {
-    alignItems: "center",
-    justifyContent: "flex-end",
-    position: "absolute",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    position: 'absolute',
     top: 0,
     bottom: 50,
     left: 0,
@@ -605,19 +605,19 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#4B5867", // Default color
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#4B5867', // Default color
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   sidebarContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     width: 200,
-    height: "100%",
-    position: "absolute",
+    height: '100%',
+    position: 'absolute',
     left: 0,
     top: 0,
     zIndex: 1,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -629,4 +629,3 @@ const styles = StyleSheet.create({
 });
 
 export default MainHome;
-

@@ -10,7 +10,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native"; // Import the useNavigation hook
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { userMethod } from "./Redux/user";
+import { userMethod } from "../../app/user";
 
 const BioScreen = ({ route }) => {
   const [pio, setPio] = useState("");

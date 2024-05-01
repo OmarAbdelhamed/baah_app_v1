@@ -37,7 +37,7 @@ const Splashsc = () => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require('./image/baa.png')}
+          source={require('../../assets/image/baa.png')}
           resizeMode='contain'
         />
       </View>
