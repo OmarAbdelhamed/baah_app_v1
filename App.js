@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Splashsc from './src/screens/splashsc';
+import SplashTwo from './src/screens/SplashTwo';
 const Stack = createStackNavigator();
 
 export default function App() {
