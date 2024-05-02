@@ -63,7 +63,7 @@ const Profile = () => {
           setSubscription(response.data);
         }
       } catch (err) {
-        Alert.alert('Error:', err.message)
+        Alert.alert('Error:', err.message);
       }
     };
     checkLogin();
@@ -113,7 +113,7 @@ const Profile = () => {
           dispatch(userMethod(response.data));
         }
       } catch (err) {
-        Alert.alert('Error:', err.message)
+        Alert.alert('Error:', err.message);
       }
     }
   };
