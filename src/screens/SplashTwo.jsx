@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 34,
     marginTop: 20,
+    marginHorizontal: 10,
     textAlign: 'center',
   },
   subtitleText: {
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginTop: 20,
     textAlign: 'center',
+    marginHorizontal: 10,
   },
   slide: {
     flex: 1,

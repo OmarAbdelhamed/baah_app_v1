@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,28 +6,26 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Alert,
-} from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useSelector } from "react-redux";
+} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
 
 const ProfileContainer = () => {
-  const [profile, setProfile] = useState({})
+  const [profile, setProfile] = useState({});
   const userinfo = useSelector((state) => state);
   // Mock profile data
   // const profile = {
   //   name: "محمد غالي",
   //   profileImage: require("./assets/pp.png"),
   // };
-useEffect(() => {
-  const checkLogin = async () => {
-
-    const token = await AsyncStorage.getItem("login");
-    setProfile(JSON.parse(token))
-  };
-  checkLogin();
-
-}, [])
+  useEffect(() => {
+    const checkLogin = async () => {
+      const token = await AsyncStorage.getItem('login');
+      setProfile(JSON.parse(token));
+    };
+    checkLogin();
+  }, []);
 
   return (
     <View style={styles.profileContainer}>
@@ -38,39 +36,45 @@ useEffect(() => {
       </View>
 
       {/* Profile Image */}
-      <Image source={{uri:userinfo.user.userArray.image}} style={styles.profileImage} />
+      <Image
+        source={{ uri: userinfo.user.userArray.image }}
+        style={styles.profileImage}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   profileContainer: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    alignItems: "center",
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#CED0CE",
+    borderBottomColor: '#CED0CE',
     paddingHorizontal: 20,
+    maxHeight: 40,
   },
   profileTextContainer: {
     flex: 1,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     paddingRight: 10,
+    marginTop:-30,
   },
   welcomeText: {
     fontSize: 16,
-    color: "#333",
+    color: '#333',
   },
   nameText: {
     fontSize: 18,
-    color: "#333",
+    color: '#333',
   },
   profileImage: {
     width: 50,
     height: 50,
     borderRadius: 25,
     marginLeft: 10,
+    marginTop:-30,
   },
 });
 

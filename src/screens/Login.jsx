@@ -85,12 +85,6 @@ const Login = ({ route }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
         <View style={styles.container}>
-          <TouchableOpacity
-            onPress={() => handleContinueClick()}
-            style={[styles.continueButton, { zIndex: 777777777777777 }]}
-          >
-            <Text style={styles.continueButtonText}>متابعة</Text>
-          </TouchableOpacity>
           <Text style={styles.title}>{state === "ChangePhone" ? "ادخل رقم الهاتف" : "ما هو رقم هاتفك ؟"}</Text>
           <View style={styles.phoneInput}>
             <TouchableOpacity onPress={toggleCountryPicker}>

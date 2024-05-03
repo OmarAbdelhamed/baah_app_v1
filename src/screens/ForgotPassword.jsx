@@ -63,28 +63,30 @@ const ForgotPasswordScreen = ({ navigation }) => {
       </View>
       <View style={styles.container}>
         <Text style={styles.title}>نسيت كلمة المرور؟</Text>
-        <Text style={styles.subtitle}>
-          أدخل رقم الهاتف الخاص بك لإعادة تعيين كلمة المرور
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder='رقم الهاتف'
-          keyboardType='numeric'
-          value={phoneNumber}
-          onChangeText={(text) => {
-            setPhoneNumber(text);
-            setPhoneNumberError('');
-          }}
-        />
-        {phoneNumberError && (
-          <Text style={styles.errorText}>{phoneNumberError}</Text>
-        )}
-        <TouchableOpacity
-          style={styles.resetButton}
-          onPress={handleResetPassword}
-        >
-          <Text style={styles.resetButtonText}>إعادة تعيين كلمة المرور</Text>
-        </TouchableOpacity>
+        <View style={styles.whiteBox}>
+          <Text style={styles.subtitle}>
+            أدخل رقم الهاتف الخاص بك لإعادة تعيين كلمة المرور
+          </Text>
+          <TextInput
+            style={styles.input}
+            placeholder='رقم الهاتف'
+            keyboardType='numeric'
+            value={phoneNumber}
+            onChangeText={(text) => {
+              setPhoneNumber(text);
+              setPhoneNumberError('');
+            }}
+          />
+          {phoneNumberError && (
+            <Text style={styles.errorText}>{phoneNumberError}</Text>
+          )}
+          <TouchableOpacity
+            style={styles.resetButton}
+            onPress={handleResetPassword}
+          >
+            <Text style={styles.resetButtonText}>إعادة تعيين كلمة المرور</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -102,7 +104,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 500,
+  },
+  whiteBox: {
+    width: '90%',
+    backgroundColor: 'rgba(236,183,183,0.5)',
+    borderRadius: 25,
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+    position: 'absolute',
+    top: 300,
+    alignItems: 'center',
   },
   subtitle: {
     fontSize: 16,
@@ -117,13 +129,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 20,
+    backgroundColor: 'white',
   },
   errorText: {
     color: 'red',
     marginBottom: 10,
   },
   resetButton: {
-    backgroundColor: '#56a5ec',
+    backgroundColor: '#E06666',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,

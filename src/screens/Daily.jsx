@@ -249,6 +249,7 @@ const styles = StyleSheet.create({
   },
   BarContainer: {
     marginBottom: 20,
+    marginTop:20,
   },
   circularButtonsContainer: {
     flexDirection: "row",

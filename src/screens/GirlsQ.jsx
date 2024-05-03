@@ -968,10 +968,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    padding:10,
   },
   contentContainer: {
     flexGrow: 1,
-    padding: 30,
+    padding: 20,
     justifyContent: 'center',
   },
   circularButtonsContainer: {
@@ -997,6 +998,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderWidth: 2,
     borderColor: '#F2F2F2',
+    marginHorizontal: 10,
   },
   choicesContainer: {
     flexDirection: 'row',
@@ -1014,6 +1016,7 @@ const styles = StyleSheet.create({
   progressBarContainer: {
     marginBottom: 20,
     paddingTop: 40, // Increase the top padding to push content below the status bar
+    marginHorizontal: 10, 
   },
   inputField: {
     width: '100%',

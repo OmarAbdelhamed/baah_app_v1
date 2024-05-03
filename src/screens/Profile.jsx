@@ -11,7 +11,7 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
-
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -409,7 +409,7 @@ const Profile = () => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
               <View style={styles.rectangle} />
-              <Text style={[styles.buttonText, { fontSize: 10 }]}>
+              <Text style={styles.buttonText}>
                 {' '}
                 {userinfo.user.userArray.need_kids_woman_man}👧
               </Text>
@@ -446,7 +446,10 @@ const Profile = () => {
             }}
           >
             <TouchableOpacity onPress={openImagePickerAsync}>
-              <Text style={styles.galleryTitle}>اضافة صور</Text>
+              <Text style={styles.addPhotosText}>
+                اضافة صور
+                <AntDesign name='plus' size={20} color='red' />
+              </Text>
             </TouchableOpacity>
             <Text style={styles.galleryTitleText}>صوري</Text>
           </View>
@@ -517,7 +520,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    marginTop: 20,
+    marginTop: 90,
     marginHorizontal: 20,
     backgroundColor: '#ffffff',
     borderRadius: 20,
@@ -542,6 +545,7 @@ const styles = StyleSheet.create({
   },
   profileInfoContainer: {
     justifyContent: 'center',
+    marginHorizontal: 10,
   },
   profileInfo: {
     fontSize: 16,
@@ -608,7 +612,9 @@ const styles = StyleSheet.create({
   impContainer: {
     marginRight: 20,
     marginTop: 20,
-    alignItems: 'flex-end', // Ensures "اساسيات" aligns to the right
+    alignItems: 'center', // Ensures "اساسيات" aligns to the right
+    marginHorizontal: 9,
+    justifyContent: 'center',
   },
   additionalTitleText: {
     fontSize: 18,
@@ -623,33 +629,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     marginTop: 10,
+    textAlign: 'center',
+    paddingHorizontal: 10,
   },
   button: {
     width: 110,
-    height: 34,
+    height: 55,
     borderWidth: 1,
     borderColor: '#485868',
     borderRadius: 13,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(236,183,183,0.5)',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 8,
+    padding: 5,
   },
   buttonText: {
     fontSize: 14,
-    color: 'pink',
+    color: 'black',
   },
   galleryTitleText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333333', // Added color specification
-    textAlign: 'right', // Aligns text to the right
+    textAlign: 'center', // Aligns text to the right
     paddingBottom: 10,
+    marginHorizontal: 15,
   },
   habitsContainer: {
     marginRight: 20,
     marginTop: 20,
-    alignItems: 'flex-end', // Ensures "عاداتي" aligns to the right
+    alignItems: 'center', // Ensures "عاداتي" aligns to the right
   },
   habitsText: {
     fontSize: 18,
@@ -662,6 +672,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     padding: 5, // Add padding to create spacing between images
+    marginHorizontal: 30,
   },
   galleryImageContainer: {
     width: '30%',
@@ -674,7 +685,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     backgroundColor: '#fff', // Optional: Add a background color for a better shadow effect
-    marginHorizontal: 3,
+    marginHorizontal: 40,
+    marginBottom: 40,
   },
   galleryImage: {
     width: '100%',
@@ -682,10 +694,11 @@ const styles = StyleSheet.create({
     borderRadius: 10, // Apply border radius for a softer look
   },
   addPhotosText: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#ff4d4d', // Added color specification
-    textAlign: 'right', // Aligns "اضافة صور" text to the right
+    textAlign: 'center', // Aligns "اضافة صور" text to the right
+    marginHorizontal: 10,
   },
   galleryImagesContainer: {
     flexDirection: 'row',

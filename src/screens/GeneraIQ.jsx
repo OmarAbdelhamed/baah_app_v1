@@ -141,13 +141,14 @@ const GeneralQ = ({ navigation, route }) => {
     const selectedBorderColor = '#ECB7B7';
 
     return {
-      width: '100%',
+      minWidth: 200,
       height: 50,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: 'white',
       borderRadius: 17,
       borderWidth: 2,
+      paddingHorizontal: 10,
       borderColor:
         selectedFamily === familyLevel
           ? selectedBorderColor
@@ -243,7 +244,7 @@ const GeneralQ = ({ navigation, route }) => {
 
   const steps = [
     {
-      question: ' * اسمــي',
+      question: ' * إسمــي',
       inputPlaceholder: 'اضغط لكتابة الاسم',
       value: userName,
       handleChange: handleNameChange,
@@ -453,6 +454,8 @@ const GeneralQ = ({ navigation, route }) => {
                   inputIOS: {
                     textAlign: 'center',
                     color: 'black', // Set the color for the selected item text
+                    borderWidth: 2,
+                    borderColor: 'black',
                   },
                   inputAndroid: {
                     textAlign: 'center',
@@ -533,6 +536,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+    marginHorizontal: 10,
   },
   circularButton: {
     width: 40,
@@ -548,6 +552,8 @@ const styles = StyleSheet.create({
   choicesContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginHorizontal: 10,
+    paddingHorizontal: 10,
   },
   choice: {
     alignItems: 'center',
@@ -566,6 +572,7 @@ const styles = StyleSheet.create({
   progressBarContainer: {
     marginBottom: 20,
     paddingTop: 30, // Increase the top padding to push content below the status bar
+    marginHorizontal: 10,
   },
   inputField: {
     width: '100%',
@@ -575,6 +582,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 17,
     borderWidth: 2,
+    paddingHorizontal: 15,
     borderColor: '#F2F2F2',
     marginVertical: 100,
     textAlign: 'right',

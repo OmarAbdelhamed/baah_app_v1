@@ -184,7 +184,7 @@ const ProfileComponent = ({
       </View>
 
       <View style={styles.galleryContainer}>
-        <Text style={styles.galleryTitle}>صوري</Text>
+        <Text style={styles.galleryTitleText}>الصور</Text>
         <View style={styles.galleryImagesContainer}>
           {profile.image_array ? (
             profile.image_array.map((image, index) => (
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#333333',
-    textAlign: 'right', // Aligns subscription text to the right
+    textAlign: 'center', // Aligns subscription text to the right
   },
   subscriptionOptionsContainer: {
     flexDirection: 'row',
@@ -358,7 +358,9 @@ const styles = StyleSheet.create({
   impContainer: {
     marginRight: 20,
     marginTop: 20,
-    alignItems: 'flex-end', // Ensures "اساسيات" aligns to the right
+    alignItems: 'center', // Ensures "اساسيات" aligns to the right
+    marginHorizontal: 9,
+    justifyContent: 'center',
   },
   additionalTitleText: {
     fontSize: 18,
@@ -369,30 +371,34 @@ const styles = StyleSheet.create({
   groupParent: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
     marginTop: 10,
+    textAlign: 'center',
+    paddingHorizontal: 10,
+    marginLeft:10,
   },
   button: {
     width: 110,
-    height: 34,
+    height: 55,
     borderWidth: 1,
     borderColor: '#485868',
     borderRadius: 13,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(236,183,183,0.5)',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 8,
+    padding: 5,
   },
   buttonText: {
     fontSize: 14,
-    color: 'pink',
+    color: 'black',
   },
   habitsContainer: {
     marginRight: 20,
     marginTop: 20,
-    alignItems: 'flex-end', // Ensures "عاداتي" aligns to the right
+    alignItems: 'center', // Ensures "عاداتي" aligns to the right
   },
   habitsText: {
     fontSize: 18,
@@ -412,6 +418,7 @@ const styles = StyleSheet.create({
     color: '#333333', // Added color specification
     marginBottom: 10,
     textAlign: 'right', // Aligns gallery title to the right
+    marginHorizontal:15,
   },
   addPhotosText: {
     fontSize: 16,
