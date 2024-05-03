@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: 'center',
     padding: 40,
   },
@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     backgroundColor: '#ffffff',
+    marginBottom: 80,
   },
   logoutText: {
     fontSize: 18,
