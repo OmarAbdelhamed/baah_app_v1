@@ -3,9 +3,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleMode } from '../../app/DarkMode';
+import { handleMode } from '../../../app/DarkMode';
 import axios from 'axios';
-import { userMethod } from '../../app/user';
+import { userMethod } from '../../../app/user';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const SettingsScreen = ({ navigation }) => {
   const [pushNotificationsEnabled, setPushNotificationsEnabled] =
@@ -43,6 +44,12 @@ const SettingsScreen = ({ navigation }) => {
   const handleAboutUs = () => {
     navigation.navigate('AboutApp');
   };
+  const handleMyProfile = () => {
+    navigation.navigate('Profile');
+  };
+  const handleSubscription = () => {
+    navigation.navigate('Subscription');
+  };
 
   const handlePrivacyPolicy = () => {
     navigation.navigate('PrivacyPolicy');
@@ -72,8 +79,8 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.circularButtonsContainer}>
+    <ScrollView style={styles.container}>
+      {/* <View style={styles.circularButtonsContainer}>
         <TouchableOpacity
           style={styles.circularButton}
           onPress={() => {
@@ -82,8 +89,16 @@ const SettingsScreen = ({ navigation }) => {
         >
           <Ionicons name='arrow-back' size={24} color='#9B9B9B' />
         </TouchableOpacity>
-      </View>
+      </View> */}
       <Text style={styles.title}>الإعدادات </Text>
+
+      <TouchableOpacity onPress={handleMyProfile} style={styles.settingItem}>
+        <Text style={styles.settingText}>بياناتي الشخصية</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleSubscription} style={styles.settingItem}>
+        <Text style={styles.settingText}>تعديل الباقة</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity
         onPress={handleChangePassword}
@@ -140,7 +155,7 @@ const SettingsScreen = ({ navigation }) => {
       >
         <Text style={styles.deleteAccountText}>الغاء الحساب</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

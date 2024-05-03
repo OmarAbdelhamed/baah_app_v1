@@ -16,14 +16,15 @@ import { useNavigation } from '@react-navigation/native';
 import HomeScreen from './tabScreens/HomeScreen';
 import FavoriteScreen from './tabScreens/FavoriteScreen';
 import MessageScreen from './tabScreens/MessageScreen';
-import { FavoritesProvider} from './tabScreens/FavoritesContext';
-import Profile from './tabScreens/Profile';
+import { FavoritesProvider } from './tabScreens/FavoritesContext';
+import Profile from './Profile';
 import SearchSubMenu from './tabScreens/SearchSubMenu';
 import ProfileContainer from './tabScreens/ProfileContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userMethod } from '../../app/user';
 import { useDispatch } from 'react-redux';
-
+import SettingsScreen from './tabScreens/SettingsScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 
@@ -60,63 +61,64 @@ const CustomTabBarButton = ({ children, onPress }) => {
   );
 };
 
-const Sidebar = ({ onClose = () => {} }) => {
-  const navigation = useNavigation();
+// const Sidebar = ({ onClose = () => {} }) => {
+//   const navigation = useNavigation();
 
-  const handleNavigation = (screenName) => {
-    navigation.navigate(screenName);
-    onClose(); // Close the sidebar after navigation
-  };
+//   const handleNavigation = (screenName) => {
+//     navigation.navigate(screenName);
+//     onClose(); // Close the sidebar after navigation
+//   };
 
-  const sidebarItems = [
-    { screenName: 'Settings', icon: 'cog' },
-    { screenName: 'Subscription', icon: 'credit-card' },
-    { screenName: 'Profile', icon: 'user' },
-    { screenName: 'AboutApp', icon: 'info-circle' },
-    { screenName: 'Logout', icon: 'sign-out' },
-  ];
-  const dispatch = useDispatch();
+//   const sidebarItems = [
+//     { screenName: 'Settings', icon: 'cog' },
+//     { screenName: 'Subscription', icon: 'credit-card' },
+//     { screenName: 'Profile', icon: 'user' },
+//     { screenName: 'AboutApp', icon: 'info-circle' },
+//     { screenName: 'Logout', icon: 'sign-out' },
+//   ];
+//   const dispatch = useDispatch();
 
-  return (
-    <TouchableWithoutFeedback onPress={onClose}>
-      <View style={styles.sidebarContainer}>
-        {sidebarItems.map((item, index) => (
-          <TouchableWithoutFeedback
-            key={index}
-            onPress={async () => {
-              if (item.screenName === 'Logout') {
-                dispatch(userMethod({}));
-                navigation.navigate('Login', {
-                  state: 'register',
-                });
-              } else {
-                handleNavigation(item.screenName);
-              }
-              // if(item.screenName==="Logout"){
-              //   onPress={async()=>{
-              //     await AsyncStorage.removeItem('login');
-              //     navigation.navigate("Login");
+//   return (
+//     <TouchableWithoutFeedback onPress={onClose}>
+//       <View style={styles.sidebarContainer}>
+//         {sidebarItems.map((item, index) => (
+//           <TouchableWithoutFeedback
+//             key={index}
+//             onPress={async () => {
+//               if (item.screenName === 'Logout') {
+//                 dispatch(userMethod({}));
+//                 navigation.navigate('Login', {
+//                   state: 'register',
+//                 });
+//               } else {
+//                 handleNavigation(item.screenName);
+//               }
+//               // if(item.screenName==="Logout"){
+//               //   onPress={async()=>{
+//               //     await AsyncStorage.removeItem('login');
+//               //     navigation.navigate("Login");
 
-              //   }}
-              // }else{
-              //   handleNavigation(item.screenName)
+//               //   }}
+//               // }else{
+//               //   handleNavigation(item.screenName)
 
-              // }
-            }}
-          >
-            <View style={styles.sidebarItem}>
-              <FontAwesome name={item.icon} size={24} color='black' />
-              <Text style={styles.sidebarItemText}>{item.screenName}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
+//               // }
+//             }}
+//           >
+//             <View style={styles.sidebarItem}>
+//               <FontAwesome name={item.icon} size={24} color='black' />
+//               <Text style={styles.sidebarItemText}>{item.screenName}</Text>
+//             </View>
+//           </TouchableWithoutFeedback>
+//         ))}
+//       </View>
+//     </TouchableWithoutFeedback>
+//   );
+// };
 
 const MainHome = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const navigation = useNavigation();
 
   const handleMenuPress = () => {
     // Toggle sidebar visibility
@@ -127,22 +129,28 @@ const MainHome = () => {
     setShowSidebar(false);
   };
 
+  const handleMyProfile = () => {
+    navigation.navigate('Profile');
+  };
+
   return (
     <FavoritesProvider>
       <TouchableWithoutFeedback onPress={handleCloseSidebar}>
         <View style={styles.container}>
           {/* Sidebar */}
-          {showSidebar && <Sidebar onClose={handleCloseSidebar} />}
+          {/* {showSidebar && <Sidebar onClose={handleCloseSidebar} />} */}
 
           {/* Profile Container and Menu Icon */}
-          <View style={styles.profileMenuContainer}>
-            <ProfileContainer />
-            <TouchableWithoutFeedback onPress={handleMenuPress}>
+          <TouchableOpacity onPress={handleMyProfile}>
+            <View style={styles.profileMenuContainer}>
+              <ProfileContainer  />
+              {/* <TouchableWithoutFeedback onPress={handleMenuPress}>
               <View style={styles.menuButton}>
                 <MaterialCommunityIcons name='menu' size={24} color='black' />
               </View>
-            </TouchableWithoutFeedback>
-          </View>
+            </TouchableWithoutFeedback> */}
+            </View>
+          </TouchableOpacity>
 
           <View style={styles.contentContainer}>
             <Tab.Navigator
@@ -240,13 +248,13 @@ const MainHome = () => {
               />
 
               <Tab.Screen
-                name='Profile'
-                component={Profile}
+                name='Setting'
+                component={SettingsScreen}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
                       <AntDesign
-                        name={focused ? 'profile' : 'profile'}
+                        name={focused ? 'setting' : 'setting'}
                         size={25}
                         color={focused ? '#ECB7B7' : '#4B5867'}
                       />
@@ -256,7 +264,7 @@ const MainHome = () => {
                           fontSize: 12,
                         }}
                       >
-                        ملفي الشخصي
+                        الاعدادات
                       </Text>
                     </View>
                   ),

@@ -21,7 +21,7 @@ import Visibility from './src/screens/Visibility';
 import MainHome from './src/screens/MainHome';
 import SignInPage from './src/screens/SignInPage';
 import UserProfile from './src/screens/UserProfile';
-import SettingsScreen from './src/screens/SettingsScreen';
+import SettingsScreen from './src/screens/tabScreens/SettingsScreen';
 import ChangePasswordScreen from './src/screens/ChangePasswordScreen';
 import VerifyPassScreen from './src/screens/VerifyPass';
 import Subscription from './src/screens/Subscription';
@@ -31,6 +31,7 @@ import AboutApp from './src/screens/AboutUs';
 import PaymentScreen from './src/screens/PaymentScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPassword';
 import PasswordResetConfirmationScreen from './src/screens/PasswordResetConfirmation';
+import Profile from './src/screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ export default function App() {
           >
             <Stack.Screen name='Splashsc' component={Splashsc} />
             <Stack.Screen name='SplashTwo' component={SplashTwo} />
+            <Stack.Screen name='Profile' component={Profile} />
             <Stack.Screen name='Login' component={Login} />
             <Stack.Screen name='LoginOTP' component={LoginOTP} />
             <Stack.Screen name='GeneralQ' component={GeneralQ} />

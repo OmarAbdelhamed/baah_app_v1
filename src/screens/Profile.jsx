@@ -19,7 +19,7 @@ import { Alert } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
-import { userMethod } from '../../../app/user';
+import { userMethod } from '../../app/user';
 import { useDispatch } from 'react-redux';
 
 const Profile = () => {
@@ -239,7 +239,7 @@ const Profile = () => {
               );
               if (response.status === 200) {
                 Alert.alert('image removed');
-                setProfilePicture(require('../../../assets/bblank.jpg'));
+                setProfilePicture(require('../../assets/bblank.jpg'));
               }
             } catch (error) {
               console.error('Error fetching data: ', error.data);
