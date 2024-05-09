@@ -111,14 +111,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
+    width: '80%',
+    height: 55,
     borderWidth: 1,
-    paddingHorizontal: 10,
-    textAlign: 'right',
+    borderColor: '#b2b8bf',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    backgroundColor: 'white',
+    alignSelf: 'center',
   },
   changePasswordButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#E06666',
+    borderRadius: 10,
   },
   changePasswordText: {
     fontSize: 18,
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
   forgetPasswordText: {
     fontSize: 16,
     color: 'blue',
-    textAlign: 'right',
+    textAlign: 'center',
     marginTop: 5,
   },
 });

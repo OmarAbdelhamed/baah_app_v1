@@ -90,18 +90,8 @@ const ProfileScreen = ({ route }) => {
 
   const validatePassword = (password) => {
     const lengthRegex = /.{8,}/; // At least 8 characters
-    const uppercaseRegex = /[A-Z]/; // At least one uppercase letter
-    const lowercaseRegex = /[a-z]/; // At least one lowercase letter
-    const digitRegex = /\d/; // At least one digit
-    const symbolRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\|\-=]/; // At least one symbol
 
-    return (
-      lengthRegex.test(password) &&
-      uppercaseRegex.test(password) &&
-      lowercaseRegex.test(password) &&
-      digitRegex.test(password) &&
-      symbolRegex.test(password)
-    );
+    return lengthRegex.test(password);
   };
 
   return (
@@ -131,7 +121,6 @@ const ProfileScreen = ({ route }) => {
           {/* Profile picture content removed */}
         </View>
       </TouchableOpacity>
-
 
       {/* White Box Container */}
       <View style={styles.whiteBox}>

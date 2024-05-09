@@ -107,13 +107,6 @@ const Login = ({ route }) => {
           </View>
           {state !== "ChangePhone" &&
             <View style={styles.buttonBackground}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('LogInPage')
-                }}
-              >
-                <Text style={styles.buttonText}>لدي حساب بالفعل</Text>
-              </TouchableOpacity>
             </View>
           }
           <Text style={styles.infoText}>
