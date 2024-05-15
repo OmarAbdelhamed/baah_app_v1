@@ -61,61 +61,6 @@ const CustomTabBarButton = ({ children, onPress }) => {
   );
 };
 
-// const Sidebar = ({ onClose = () => {} }) => {
-//   const navigation = useNavigation();
-
-//   const handleNavigation = (screenName) => {
-//     navigation.navigate(screenName);
-//     onClose(); // Close the sidebar after navigation
-//   };
-
-//   const sidebarItems = [
-//     { screenName: 'Settings', icon: 'cog' },
-//     { screenName: 'Subscription', icon: 'credit-card' },
-//     { screenName: 'Profile', icon: 'user' },
-//     { screenName: 'AboutApp', icon: 'info-circle' },
-//     { screenName: 'Logout', icon: 'sign-out' },
-//   ];
-//   const dispatch = useDispatch();
-
-//   return (
-//     <TouchableWithoutFeedback onPress={onClose}>
-//       <View style={styles.sidebarContainer}>
-//         {sidebarItems.map((item, index) => (
-//           <TouchableWithoutFeedback
-//             key={index}
-//             onPress={async () => {
-//               if (item.screenName === 'Logout') {
-//                 dispatch(userMethod({}));
-//                 navigation.navigate('Login', {
-//                   state: 'register',
-//                 });
-//               } else {
-//                 handleNavigation(item.screenName);
-//               }
-//               // if(item.screenName==="Logout"){
-//               //   onPress={async()=>{
-//               //     await AsyncStorage.removeItem('login');
-//               //     navigation.navigate("Login");
-
-//               //   }}
-//               // }else{
-//               //   handleNavigation(item.screenName)
-
-//               // }
-//             }}
-//           >
-//             <View style={styles.sidebarItem}>
-//               <FontAwesome name={item.icon} size={24} color='black' />
-//               <Text style={styles.sidebarItemText}>{item.screenName}</Text>
-//             </View>
-//           </TouchableWithoutFeedback>
-//         ))}
-//       </View>
-//     </TouchableWithoutFeedback>
-//   );
-// };
-
 const MainHome = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const navigation = useNavigation();
