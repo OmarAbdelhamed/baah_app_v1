@@ -21,6 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
 import { userMethod } from '../../app/user';
 import { useDispatch } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
 
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -263,6 +264,14 @@ const Profile = () => {
   // ]);
   return (
     <SafeAreaView style={{ flex: 1 }}>
+         <TouchableOpacity
+          style={styles.circularButton}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Ionicons name='arrow-back' size={24} color='#9B9B9B' />
+        </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
           <View style={styles.profileContainer}>
@@ -750,6 +759,19 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+
+
+  circularButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 5,
+    borderWidth: 2,
+    borderColor: '#F2F2F2',
   },
 });
 

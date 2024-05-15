@@ -118,18 +118,18 @@ const SettingsScreen = ({ navigation }) => {
         <Text style={styles.settingText}>إضافة وسيلة دفع</Text>
       </TouchableOpacity>
 
-      <View style={styles.settingRow}>
+      {/* <View style={styles.settingRow}>
         <Switch
           value={pushNotificationsEnabled}
           onValueChange={togglePushNotifications}
         />
         <Text style={styles.settingText}>الإشعارات</Text>
-      </View>
+      </View> */}
 
-      <View style={styles.settingRow}>
+      {/* <View style={styles.settingRow}>
         <Switch value={darkModeEnabled} onValueChange={toggleDarkMode} />
         <Text style={styles.settingText}>الوضع الليلي</Text>
-      </View>
+      </View> */}
 
       <TouchableOpacity onPress={handleAboutUs} style={styles.settingItem}>
         <Text style={styles.settingText}>حول التطبيق</Text>
@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
   settingText: {
     fontSize: 18,
     color: '#333333',
+    textAlign:'right'
   },
   logoutButton: {
     backgroundColor: '#ffffff',

@@ -11,6 +11,7 @@ import {
   MaterialCommunityIcons,
   AntDesign,
   FontAwesome,
+  MaterialIcons,
 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import HomeScreen from './tabScreens/HomeScreen';
@@ -25,6 +26,7 @@ import { userMethod } from '../../app/user';
 import { useDispatch } from 'react-redux';
 import SettingsScreen from './tabScreens/SettingsScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import SearchScreen from './SearchScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -60,6 +62,61 @@ const CustomTabBarButton = ({ children, onPress }) => {
     </View>
   );
 };
+
+// const Sidebar = ({ onClose = () => {} }) => {
+//   const navigation = useNavigation();
+
+//   const handleNavigation = (screenName) => {
+//     navigation.navigate(screenName);
+//     onClose(); // Close the sidebar after navigation
+//   };
+
+//   const sidebarItems = [
+//     { screenName: 'Settings', icon: 'cog' },
+//     { screenName: 'Subscription', icon: 'credit-card' },
+//     { screenName: 'Profile', icon: 'user' },
+//     { screenName: 'AboutApp', icon: 'info-circle' },
+//     { screenName: 'Logout', icon: 'sign-out' },
+//   ];
+//   const dispatch = useDispatch();
+
+//   return (
+//     <TouchableWithoutFeedback onPress={onClose}>
+//       <View style={styles.sidebarContainer}>
+//         {sidebarItems.map((item, index) => (
+//           <TouchableWithoutFeedback
+//             key={index}
+//             onPress={async () => {
+//               if (item.screenName === 'Logout') {
+//                 dispatch(userMethod({}));
+//                 navigation.navigate('Login', {
+//                   state: 'register',
+//                 });
+//               } else {
+//                 handleNavigation(item.screenName);
+//               }
+//               // if(item.screenName==="Logout"){
+//               //   onPress={async()=>{
+//               //     await AsyncStorage.removeItem('login');
+//               //     navigation.navigate("Login");
+
+//               //   }}
+//               // }else{
+//               //   handleNavigation(item.screenName)
+
+//               // }
+//             }}
+//           >
+//             <View style={styles.sidebarItem}>
+//               <FontAwesome name={item.icon} size={24} color='black' />
+//               <Text style={styles.sidebarItemText}>{item.screenName}</Text>
+//             </View>
+//           </TouchableWithoutFeedback>
+//         ))}
+//       </View>
+//     </TouchableWithoutFeedback>
+//   );
+// };
 
 const MainHome = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -118,19 +175,8 @@ const MainHome = () => {
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
-                      <MaterialCommunityIcons
-                        name={focused ? 'home' : 'home'}
-                        size={25}
-                        color={focused ? '#ECB7B7' : '#4B5867'}
-                      />
-                      <Text
-                        style={{
-                          color: focused ? '#ECB7B7' : '#4B5867',
-                          fontSize: 12,
-                        }}
-                      >
-                        الرئيسية
-                      </Text>
+                    
+                 <MaterialCommunityIcons name="cards" size={30} color={focused ? '#ECB7B7' : '#4B5867'}/>
                     </View>
                   ),
                 }}
@@ -142,29 +188,33 @@ const MainHome = () => {
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
-                      <AntDesign
-                        name={focused ? 'message1' : 'message1'}
-                        size={25}
-                        color={focused ? '#ECB7B7' : '#4B5867'}
-                      />
-                      <Text
-                        style={{
-                          color: focused ? '#ECB7B7' : '#4B5867',
-                          fontSize: 12,
-                        }}
-                      >
-                        الرسائل
-                      </Text>
+                 
+                <AntDesign name="mail" size={30}  color={focused ? '#ECB7B7' : '#4B5867'}/>
+                
                     </View>
                   ),
                 }}
               />
 
-              <Tab.Screen
+              {/* <Tab.Screen
                 name='Home'
                 component={HomeScreen}
                 options={{
                   tabBarButton: (props) => <CustomTabBarButton {...props} />,
+                }}
+              /> */}
+
+<Tab.Screen
+                name='Search'
+                component={SearchScreen}
+                options={{
+                  tabBarIcon: ({ focused }) => (
+                    <View style={[styles.searchButton,styles.tabIconContainer]}>
+                                 <AntDesign name="search1" size={30} color={focused ? '#ECB7B7' : '#fff'} />
+
+               
+                    </View>
+                  ),
                 }}
               />
 
@@ -179,14 +229,7 @@ const MainHome = () => {
                         size={30}
                         color={focused ? '#ECB7B7' : '#4B5867'}
                       />
-                      <Text
-                        style={{
-                          color: focused ? '#ECB7B7' : '#4B5867',
-                          fontSize: 12,
-                        }}
-                      >
-                        المفضلة
-                      </Text>
+               
                     </View>
                   ),
                 }}
@@ -198,19 +241,19 @@ const MainHome = () => {
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
-                      <AntDesign
-                        name={focused ? 'setting' : 'setting'}
-                        size={25}
-                        color={focused ? '#ECB7B7' : '#4B5867'}
-                      />
-                      <Text
+                   
+              
+
+
+<AntDesign name="setting" size={30} color={focused ? '#ECB7B7' : '#4B5867'} />
+                      {/* <Text
                         style={{
                           color: focused ? '#ECB7B7' : '#4B5867',
                           fontSize: 12,
                         }}
                       >
                         الاعدادات
-                      </Text>
+                      </Text> */}
                     </View>
                   ),
                 }}

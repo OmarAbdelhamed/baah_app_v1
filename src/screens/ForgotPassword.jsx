@@ -49,6 +49,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
     <View
       style={{
         flex: 1,
+        
       }}
     >
       <View style={styles.circularButtonsContainer}>
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
     marginLeft: 10,
+    marginTop:30
   },
 
   circularButton: {

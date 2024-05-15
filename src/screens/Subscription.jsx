@@ -12,18 +12,19 @@ import {
   Alert,
 } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { useSelector } from 'react-redux';
 
 const Subscription = () => {
   const [selectedPlan, setSelectedPlan] = useState('');
   const navigation = useNavigation();
-
+  const userinfo = useSelector((state) => state);
   const handleSelectPlan = async (plan) => {
     setSelectedPlan(plan);
     try {
-      const token = await AsyncStorage.getItem('login');
+      
       const response = await axios.post(
         `https://marriage-application.onrender.com/upgrade/subscription?id=${
-          JSON.parse(token).id
+          userinfo.user.userArray.id
         }&subscription=${plan}`
       );
       if (response.status) {
@@ -32,22 +33,10 @@ const Subscription = () => {
     } catch (err) {
       Alert.alert(err);
     }
-    // try {
-    //   const token = await AsyncStorage.getItem("login");
-    //   const response = await axios.post(`https://marriage-application.onrender.com/addtofav?id=${JSON.parse(token).id}&favIsubscriptiond=${plan}`);
-    //   // Alert.alert(response.data)
-    //   if(response.status){
-    //     Alert.alert(response.data)
-
-    //   }
-    // } catch (err) {
-    //   Alert.alert(err)
-    // }
   };
   useEffect(() => {
     const getUserSub = async () => {
-      const token = await AsyncStorage.getItem('login');
-      setSelectedPlan(JSON.parse(token).subscription);
+      setSelectedPlan(userinfo.user.userArray.subscription);
     };
     getUserSub();
   }, []);

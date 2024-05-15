@@ -42,8 +42,8 @@ const ChangePasswordScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={[styles.iconButton, styles.topLeft]}
-        onPress={() => navigation.goBack()}
+          style={styles.circularButton}
+          onPress={() => navigation.goBack()}
       >
         <AntDesign name='arrowleft' size={24} color='#9B9B9B' />
       </TouchableOpacity>
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
     backgroundColor: '#ffffff',
+    marginVertical:30
   },
   title: {
     fontSize: 24,
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: '80%',
+    width: '100%',
     height: 55,
     borderWidth: 1,
     borderColor: '#b2b8bf',
@@ -133,8 +134,20 @@ const styles = StyleSheet.create({
   forgetPasswordText: {
     fontSize: 16,
     color: 'blue',
-    textAlign: 'center',
+    textAlign: 'right',
     marginTop: 5,
+  },
+  
+  circularButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 5,
+    borderWidth: 2,
+    borderColor: '#F2F2F2',
   },
 });
 

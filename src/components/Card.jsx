@@ -34,20 +34,73 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
 
   return (
     <TouchableOpacity onPress={handleCardPress}>
-      <View style={styles.card}>
-        <View style={{ flexDirection: 'row-reverse', alignItems: 'center' }}>
-          {/* <Image
-              source={require('./assets/girltt.jpg')}
-              style={styles.profileImage}
-              resizeMode="cover"
-            /> */}
-          <Image
-            source={{ uri: card.image }}
-            style={styles.profileImage}
-            resizeMode='cover'
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.gradientButton, styles.messageButton]}
+          onPress={() => {
+            navigation.navigate('chat', {
+              participant: card.id,
+              name: card.name,
+              image: card.image,
+            });
+          }}
+        >
+          <Icon name='envelope' size={50} style={styles.icon} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.gradientButton, styles.favoriteButton]}
+          onPress={async () => {
+            try {
+              const response = await axios.post(
+                `https://marriage-application.onrender.com/addtofav?id=${userinfo.user.userArray.id}&favId=${card.id}`
+              );
+              // Alert.alert(response.data)
+              if (response.status) {
+                toggleFavorite(card.id);
+                Alert.alert(response.data);
+                if (response.data === 'User added to fav') {
+                  dispatch(addFavoriteMethod(card));
+                } else {
+                  dispatch(removeFavoriteMethod(card.id));
+                }
+              }
+            } catch (err) {
+              Alert.alert('Error:', err.message);
+            }
+          }}
+        >
+          <Icon
+            name='star'
+            size={45}
+            style={[
+              styles.icon,
+              {
+                color:
+                  isFavorite || favStatus.length == 1 ? '#424040' : '#ECB7B7',
+              },
+            ]} // Directly apply color change here
+          />
+        </TouchableOpacity>
+      </View>
+      <View
+        style={styles.card}
+      >
+
+        <View style={styles.imageContainer}>
+          <Image source={require('../../assets/2.png')}
+            style={styles.image}
           />
 
-          <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 10 }}>
+          <View
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              width:'100%',
+              paddingHorizontal:20,
+              paddingBottom:7,
+              backgroundColor:'rgba(0,0,0,0.5)'
+            }}
+          >
             <Text style={styles.name}>{card.name}</Text>
             <View
               style={{
@@ -56,7 +109,7 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
                 marginTop: 5,
               }}
             >
-              <Icon name='location' size={20} />
+              <Icon name='location' size={20}color={'white'} />
               <Text style={styles.detailText}>
                 {card.country},{card.city}
               </Text>
@@ -75,57 +128,13 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
               </Text>
             </View>
           </View>
+
         </View>
-        <View style={styles.separator} />
-        <Text style={styles.description}>{card.pio}</Text>
-        <View style={styles.infoBoxContainer}>{/* Info buttons... */}</View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.gradientButton, styles.messageButton]}
-            onPress={() => {
-              navigation.navigate('chat', {
-                participant: card.id,
-                name: card.name,
-                image: card.image,
-              });
-            }}
-          >
-            <Icon name='envelope' size={30} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.gradientButton, styles.favoriteButton]}
-            onPress={async () => {
-              try {
-                const response = await axios.post(
-                  `https://marriage-application.onrender.com/addtofav?id=${userinfo.user.userArray.id}&favId=${card.id}`
-                );
-                // Alert.alert(response.data)
-                if (response.status) {
-                  toggleFavorite(card.id);
-                  Alert.alert(response.data);
-                  if (response.data === 'User added to fav') {
-                    dispatch(addFavoriteMethod(card));
-                  } else {
-                    dispatch(removeFavoriteMethod(card.id));
-                  }
-                }
-              } catch (err) {
-                Alert.alert('Error:', err.message);
-              }
-            }}
-          >
-            <Icon
-              name='star'
-              size={30}
-              style={[
-                styles.icon,
-                {
-                  color:
-                    isFavorite || favStatus.length == 1 ? 'white' : '#ECB7B7',
-                },
-              ]} // Directly apply color change here
-            />
-          </TouchableOpacity>
+        <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 10, padding: 20 }}>
+
+          <Text style={styles.description}>{card.pio}</Text>
+          <View style={styles.infoBoxContainer}>{/* Info buttons... */}</View>
+
         </View>
         <View style={styles.infoBoxContainer}>
           {card.marital_status_woman_man && (
@@ -186,6 +195,7 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
             </TouchableOpacity>
           )}
         </View>
+
       </View>
     </TouchableOpacity>
   );
@@ -196,14 +206,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     // alignItems: "center",
-    backgroundColor: '#ECB7B7',
+    backgroundColor: '#fff',
     paddingBottom: 20, // Add padding to the bottom
     paddingTop: 22,
     paddingHorizontal: 12,
   },
   card: {
     width: width * 0.88,
-    aspectRatio: 3 / 4,
+    aspectRatio: 2.5 / 4,
     borderRadius: 10,
     backgroundColor: 'white',
     elevation: 3,
@@ -214,8 +224,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    // paddingHorizontal: 20,
+    // paddingVertical: 15,
     marginBottom: 90, // Add margin to the bottom
   },
   profileImage: {
@@ -234,7 +244,14 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
   },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
 
+
+  },
   profileContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -255,10 +272,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 5,
     justifyContent: 'right',
+    color:'white'
+
   },
   icon: {
-    marginRight: 5,
-    color: 'white',
+    color: '#424040',
   },
 
   lastSeenContainer: {
@@ -278,21 +296,22 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   imageContainer: {
-    width: 85,
-    height: 85,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#FFF',
-    borderRadius: 42.5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
+    width: '100%',
+    height: '70%',
+    position:'relative',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // borderWidth: 2,
+    // borderColor: '#FFF',
+    // borderRadius: 42.5,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 3,
+    // elevation: 5,
   },
   profileImage: {
     top: -50,
@@ -303,11 +322,14 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 0,
+    textAlign:'right',
+    color:'white'
   },
   location: {
     fontSize: 16,
     color: '#666',
+    
   },
   placeholderText: {
     paddingHorizontal: 15,
@@ -317,7 +339,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: '#ECB7B7',
+    backgroundColor: '#fff',
     marginVertical: 10,
   },
   infoBoxContainer: {
@@ -326,6 +348,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
     marginTop: 10,
+    paddingHorizontal:7
   },
   infoButton: {
     paddingHorizontal: 8, // Reduced padding to bring buttons closer
@@ -345,35 +368,36 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 7,
     paddingBottom: 20,
     position: 'absolute', // Position the container absolutely to allow positioning outside of the card
-    bottom: -50, // Move the container up to make buttons appear outside
-    left: 0, // Align with the left edge of the card
-    right: 0, // Align with the right edge of the card
+    bottom: 2, // Move the container up to make buttons appear outside
+    left: 7, // Align with the left edge of the card
+    right: 7, // Align with the right edge of the card
     alignItems: 'center', // Center the buttons horizontally
   },
   messageButton: {
-    backgroundColor: '#485868',
-    borderRadius: 25,
-    paddingHorizontal: 40,
-    paddingVertical: 12,
-    shadowColor: '#ECB7B7',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
+    borderRadius: '50%',
+    // paddingHorizontal: 40,
+    // paddingVertical: 12,
+    // shadowColor: '#ECB7B7',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 3,
+    // elevation: 5,
+    // borderColor: 'black',
+    // borderWidth: 1
   },
   icon: {
-    color: 'white',
+    color: '#424040',
   },
   gradientButton: {
-    borderRadius: 25,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    borderRadius: '50%',
+    paddingHorizontal: 7,
+    paddingVertical: 7,
     marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -405,18 +429,19 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   favoriteButton: {
-    backgroundColor: '#485868',
-    borderRadius: 25,
-    paddingHorizontal: 40,
-    paddingVertical: 12,
-    shadowColor: '#ECB7B7',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
+    borderRadius: '50%',
+    paddingHorizontal: 9,
+    paddingVertical: 9,
+    // borderColor: '#000',
+    // borderWidth: 1
+    // shadowColor: '#ECB7B7',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 3,
+    // elevation: 5,
   },
   favoriteActive: {
     backgroundColor: '#ECB7B7', // Active favorite background color

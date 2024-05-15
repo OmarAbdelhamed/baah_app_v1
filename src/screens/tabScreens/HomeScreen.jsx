@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     // alignItems: "center",
-    backgroundColor: '#ECB7B7',
+    backgroundColor: '#fff',
     paddingBottom: 20, // Add padding to the bottom
     paddingTop: 22,
     paddingHorizontal: 12,
@@ -279,28 +279,12 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 40,
     paddingVertical: 12,
-    shadowColor: '#ECB7B7',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
   },
   favoriteButton: {
     backgroundColor: '#485868',
     borderRadius: 25,
     paddingHorizontal: 40,
     paddingVertical: 12,
-    shadowColor: '#ECB7B7',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
   },
   favoriteActive: {
     backgroundColor: '#ECB7B7', // Active favorite background color
@@ -313,14 +297,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
