@@ -12,8 +12,11 @@ import {
 import * as ExpoImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Entypo } from '@expo/vector-icons';
 
 const SignInPage = ({ route }) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordVisible2, setIsPasswordVisible2] = useState(false);
   const [avatarSource, setAvatarSource] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
   const [username, setUsername] = useState('');
@@ -192,28 +195,52 @@ const SignInPage = ({ route }) => {
         />
 
         {/* Password Input */}
-        <TextInput
-          style={[styles.input, styles.passwordInput]}
-          placeholder='كلمة المرور'
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => {
-            setPassword(text);
-            setPasswordError('');
-          }}
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={[styles.inputPass, styles.passwordInput]}
+            placeholder='كلمة المرور'
+            secureTextEntry={!isPasswordVisible}
+            value={password}
+            onChangeText={(text) => {
+              setPassword(text);
+              setPasswordError('');
+            }}
+          />
+          <TouchableOpacity
+            style={styles.toggleButton}
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          >
+            <Entypo
+              name={isPasswordVisible ? 'eye' : 'eye-with-line'}
+              size={24}
+              color='black'
+            />
+          </TouchableOpacity>
+        </View>
 
         {/* Confirm Password Input */}
-        <TextInput
-          style={[styles.input, styles.passwordInput]}
-          placeholder='تأكيد كلمة المرور'
-          secureTextEntry={true}
-          value={confirmPassword}
-          onChangeText={(text) => {
-            setConfirmPassword(text);
-            setPasswordError('');
-          }}
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={[styles.inputPass, styles.passwordInput]}
+            placeholder='تأكيد كلمة المرور '
+            secureTextEntry={!isPasswordVisible2}
+            value={confirmPassword}
+            onChangeText={(text) => {
+              setConfirmPassword(text);
+              setPasswordError('');
+            }}
+          />
+          <TouchableOpacity
+            style={styles.toggleButton}
+            onPress={() => setIsPasswordVisible2(!isPasswordVisible2)}
+          >
+            <Entypo
+              name={isPasswordVisible2 ? 'eye' : 'eye-with-line'}
+              size={24}
+              color='black'
+            />
+          </TouchableOpacity>
+        </View>
 
         {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
         {passwordError && (
@@ -277,7 +304,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white', // Background color for better visualization
+    backgroundColor: 'white',
+    marginTop:-40, // Background color for better visualization
   },
 
   whiteBox: {
@@ -301,6 +329,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'white', // Add background color to the input
     alignSelf: 'center', // Center the input within the white box
   },
+  inputPass: {
+    width: '100%',
+    height: 55,
+    borderWidth: 1,
+    borderColor: '#b2b8bf', // Change border color to match the white box
+    borderRadius: 10,
+    marginVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: 'white', // Add background color to the input
+    alignSelf: 'center', // Center the input within the white box
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
+    height: 55,
+    borderRadius: 10,
+    marginVertical: 10,
+    marginTop: 10,
+    backgroundColor: 'white',
+    alignSelf: 'center',
+  },
   imageContainer: {
     position: 'relative',
     width: 150,
@@ -310,7 +360,7 @@ const styles = StyleSheet.create({
     borderColor: '#f0f0f0', // match background color
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 300,
+    marginBottom: 600,
     overflow: 'hidden',
   },
   image: {
@@ -357,6 +407,10 @@ const styles = StyleSheet.create({
   },
   passwordInput: {
     textAlign: 'right',
+  },
+  toggleButton: {
+    position: 'absolute',
+    right: 250,
   },
   passwordRequirement: {
     marginTop: 10,

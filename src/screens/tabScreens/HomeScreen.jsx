@@ -106,7 +106,6 @@ const HomeScreen = () => {
           />
         )}
         renderNoMoreCards={() => <NoMoreCards />}
-        useNativeDriver = {true}
       />
     </View>
   );

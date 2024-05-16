@@ -27,6 +27,7 @@ import { useDispatch } from 'react-redux';
 import SettingsScreen from './tabScreens/SettingsScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import SearchScreen from './SearchScreen';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -145,7 +146,7 @@ const MainHome = () => {
           {/* Profile Container and Menu Icon */}
           <TouchableOpacity onPress={handleMyProfile}>
             <View style={styles.profileMenuContainer}>
-              <ProfileContainer  />
+              <ProfileContainer />
               {/* <TouchableWithoutFeedback onPress={handleMenuPress}>
               <View style={styles.menuButton}>
                 <MaterialCommunityIcons name='menu' size={24} color='black' />
@@ -175,8 +176,11 @@ const MainHome = () => {
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
-                    
-                 <MaterialCommunityIcons name="cards" size={30} color={focused ? '#ECB7B7' : '#4B5867'}/>
+                      <MaterialCommunityIcons
+                        name='cards'
+                        size={30}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
+                      />
                     </View>
                   ),
                 }}
@@ -188,9 +192,11 @@ const MainHome = () => {
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
-                 
-                <AntDesign name="mail" size={30}  color={focused ? '#ECB7B7' : '#4B5867'}/>
-                
+                      <Ionicons
+                        name='mail-outline'
+                        size={33}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
+                      />
                     </View>
                   ),
                 }}
@@ -204,15 +210,19 @@ const MainHome = () => {
                 }}
               /> */}
 
-<Tab.Screen
+              <Tab.Screen
                 name='Search'
                 component={SearchScreen}
                 options={{
                   tabBarIcon: ({ focused }) => (
-                    <View style={[styles.searchButton,styles.tabIconContainer]}>
-                                 <AntDesign name="search1" size={30} color={focused ? '#ECB7B7' : '#fff'} />
-
-               
+                    <View
+                      style={[styles.searchButton, styles.tabIconContainer]}
+                    >
+                      <AntDesign
+                        name='search1'
+                        size={30}
+                        color={focused ? '#ECB7B7' : '#fff'}
+                      />
                     </View>
                   ),
                 }}
@@ -229,7 +239,6 @@ const MainHome = () => {
                         size={30}
                         color={focused ? '#ECB7B7' : '#4B5867'}
                       />
-               
                     </View>
                   ),
                 }}
@@ -241,11 +250,11 @@ const MainHome = () => {
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <View style={styles.tabIconContainer}>
-                   
-              
-
-
-<AntDesign name="setting" size={30} color={focused ? '#ECB7B7' : '#4B5867'} />
+                      <AntDesign
+                        name='setting'
+                        size={30}
+                        color={focused ? '#ECB7B7' : '#4B5867'}
+                      />
                       {/* <Text
                         style={{
                           color: focused ? '#ECB7B7' : '#4B5867',

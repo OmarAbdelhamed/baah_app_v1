@@ -8,17 +8,35 @@ import {
   Dimensions,
   Image,
   Alert,
+  PixelRatio,
+  Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import axios from 'axios';
 import { usersMethod } from '../../app/users';
+import { Ionicons } from '@expo/vector-icons';
 import {
   addFavoriteMethod,
   favoriteMethod,
   removeFavoriteMethod,
 } from '../../app/Favorite';
+import { FavoritesProvider } from '../screens/tabScreens/FavoritesContext';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
+
+// Sizes based on Google Nexus 5 on genymotion
+const guidelineBaseWidth = 448;
+const guidelineBaseHeight = 998;
+
+const scale = (size) => (width / guidelineBaseWidth) * size;
+const verticalScale = (size) => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) => {
+  if (Platform.OS === 'ios') {
+    factor = PixelRatio.get();
+  }
+
+  return size + (scale(size) - size) * factor;
+};
 const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -45,7 +63,7 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
             });
           }}
         >
-          <Icon name='envelope' size={50} style={styles.icon} />
+          <Ionicons name='mail-outline' size={33} color='black' />
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.gradientButton, styles.favoriteButton]}
@@ -71,34 +89,30 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
         >
           <Icon
             name='star'
-            size={45}
+            size={37}
             style={[
-              styles.icon,
               {
                 color:
-                  isFavorite || favStatus.length == 1 ? '#424040' : '#ECB7B7',
+                  isFavorite || favStatus.length == 1
+                    ? '#424040'
+                    : 'rgba(255, 206, 88, 1)',
               },
             ]} // Directly apply color change here
           />
         </TouchableOpacity>
       </View>
-      <View
-        style={styles.card}
-      >
-
+      <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <Image source={require('../../assets/2.png')}
-            style={styles.image}
-          />
+          <Image source={require('../../assets/2.png')} style={styles.image} />
 
           <View
             style={{
               position: 'absolute',
               bottom: 0,
-              width:'100%',
-              paddingHorizontal:20,
-              paddingBottom:7,
-              backgroundColor:'rgba(0,0,0,0.5)'
+              width: '100%',
+              paddingHorizontal: 20,
+              paddingBottom: 7,
+              backgroundColor: 'rgba(0,0,0,0.5)',
             }}
           >
             <Text style={styles.name}>{card.name}</Text>
@@ -109,7 +123,7 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
                 marginTop: 5,
               }}
             >
-              <Icon name='location' size={20}color={'white'} />
+              <Icon name='location' size={20} color={'white'} />
               <Text style={styles.detailText}>
                 {card.country},{card.city}
               </Text>
@@ -128,13 +142,17 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
               </Text>
             </View>
           </View>
-
         </View>
-        <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 10, padding: 20 }}>
-
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'flex-end',
+            marginRight: 10,
+            padding: 20,
+          }}
+        >
           <Text style={styles.description}>{card.pio}</Text>
           <View style={styles.infoBoxContainer}>{/* Info buttons... */}</View>
-
         </View>
         <View style={styles.infoBoxContainer}>
           {card.marital_status_woman_man && (
@@ -195,7 +213,6 @@ const Card = ({ card, toggleFavorite, isFavorite, favArr }) => {
             </TouchableOpacity>
           )}
         </View>
-
       </View>
     </TouchableOpacity>
   );
@@ -212,7 +229,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   card: {
-    width: width * 0.88,
+    width: moderateScale(400),
     aspectRatio: 2.5 / 4,
     borderRadius: 10,
     backgroundColor: 'white',
@@ -229,8 +246,8 @@ const styles = StyleSheet.create({
     marginBottom: 90, // Add margin to the bottom
   },
   profileImage: {
-    width: 80,
-    height: 80,
+    width: moderateScale(80),
+    height: verticalScale(80),
     borderRadius: 40,
     borderWidth: 2,
     borderColor: '#FFF',
@@ -245,12 +262,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: 100,
+    height: 100,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-
-
   },
   profileContainer: {
     flexDirection: 'row',
@@ -271,9 +286,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,
-    justifyContent: 'right',
-    color:'white'
-
+    justifyContent: 'flex-end',
+    color: 'white',
   },
   icon: {
     color: '#424040',
@@ -298,7 +312,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
     height: '70%',
-    position:'relative',
+    position: 'relative',
     // justifyContent: 'center',
     // alignItems: 'center',
     // borderWidth: 2,
@@ -323,13 +337,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 0,
-    textAlign:'right',
-    color:'white'
+    textAlign: 'right',
+    color: 'white',
   },
   location: {
     fontSize: 16,
     color: '#666',
-    
   },
   placeholderText: {
     paddingHorizontal: 15,
@@ -348,7 +361,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
     marginTop: 10,
-    paddingHorizontal:7
+    paddingHorizontal: 7,
   },
   infoButton: {
     paddingHorizontal: 8, // Reduced padding to bring buttons closer
@@ -377,7 +390,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center the buttons horizontally
   },
   messageButton: {
-    borderRadius: '50%',
+    borderRadius: 100,
     // paddingHorizontal: 40,
     // paddingVertical: 12,
     // shadowColor: '#ECB7B7',
@@ -390,23 +403,16 @@ const styles = StyleSheet.create({
     // elevation: 5,
     // borderColor: 'black',
     // borderWidth: 1
+    backgroundColor: 'rgba(255, 231, 243, 0.5)',
   },
   icon: {
     color: '#424040',
   },
   gradientButton: {
-    borderRadius: '50%',
+    borderRadius: 50,
     paddingHorizontal: 7,
     paddingVertical: 7,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -429,9 +435,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   favoriteButton: {
-    borderRadius: '50%',
-    paddingHorizontal: 9,
-    paddingVertical: 9,
+    borderRadius: 100,
     // borderColor: '#000',
     // borderWidth: 1
     // shadowColor: '#ECB7B7',
@@ -442,6 +446,9 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.4,
     // shadowRadius: 3,
     // elevation: 5,
+    height: 50,
+    paddingBottom: 12,
+    backgroundColor: 'rgba(255, 231, 243, 0.46)',
   },
   favoriteActive: {
     backgroundColor: '#ECB7B7', // Active favorite background color

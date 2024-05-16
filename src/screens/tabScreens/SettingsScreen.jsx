@@ -28,6 +28,7 @@ const SettingsScreen = ({ navigation }) => {
 
   const handleAddPaymentMethod = () => {
     // Implement payment method addition functionality
+    navigation.navigate('Subscription');
   };
 
   const togglePushNotifications = () => {
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
   settingText: {
     fontSize: 18,
     color: '#333333',
-    textAlign:'right'
+    textAlign: 'right',
   },
   logoutButton: {
     backgroundColor: '#ffffff',

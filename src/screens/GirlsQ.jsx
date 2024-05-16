@@ -59,22 +59,22 @@ const GirlsQ = ({ navigation, route }) => {
       Animated.timing(animation, {
         toValue: 10,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(animation, {
         toValue: -10,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(animation, {
         toValue: 10,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(animation, {
         toValue: 0,
         duration: 100,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   };
